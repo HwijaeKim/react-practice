@@ -37,7 +37,7 @@ function App() {
           changePost(copy)
         }
 
-      }>글 수정 dev</button>
+      }>글 수정 dev dev dev</button>
 
     <div className='list'>
       <h4>{ post[0] } <span onClick={likeF}>👍</span> {like} </h4>
