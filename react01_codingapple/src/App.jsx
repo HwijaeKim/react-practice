@@ -11,6 +11,8 @@ function App() {
   let [post, changePost] = useState(['여자코트추천', '강남우동맛집', '파이썬독학']);
   let [like, changeLike] = useState(0);
 
+  let [modal, setModal] = useState(false);
+
   function likeF() {
     changeLike(like++)
   }
@@ -48,11 +50,14 @@ function App() {
       </div>
 
       <div className='list'>
-        <h4>{post[2]}</h4>
+        <h4 onClick={() => { setModal(modal == true ? false : true) }}>{post[2]}</h4>
         <p>2월 12일 발행</p>
       </div>
 
-      <Modal />
+      {/* 조건식 ? 참일 떄 실행할 코드 : 거짓일 때 실행할 코드 */}
+      {
+        modal == true ? <Modal /> : null
+      }
 
 
 

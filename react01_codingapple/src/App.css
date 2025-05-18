@@ -23,6 +23,9 @@ div {
 .list span:hover {
   cursor: pointer;
 }
+.list h4 {
+  cursor: pointer;
+}
 
 .modal {
   margin-top: 20px;
