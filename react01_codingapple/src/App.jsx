@@ -8,13 +8,19 @@ function App() {
 
   // a = 실제 변수값, b = state 변경을 도와주는 함수
   // 굳이 useState?: 그냥 변수는 변수값이 바뀌면 HTML에 자동으로 반영되지 않지만 useState는 변수값이 바뀌면 실시간으로 HTML에 반영됨
-  let [post, changePost] = useState(['여자코트추천', '강남우동맛집', '파이썬독학']);
-  let [like, changeLike] = useState([0]);
+  let [post, changePost] = useState(['남자코트추천', '강남우동맛집', '파이썬독학']);
+  let [like, changeLike] = useState([0, 0, 0]);
 
   let [modal, setModal] = useState(false);
 
-  function likeF() {
+  function likeF(index) {
     changeLike(like++)
+  }
+
+  function 글제목변경() {
+    let copy = [...post];
+    copy[0] = '여자코트추천';
+    changePost(copy);
   }
 
 
@@ -58,8 +64,12 @@ function App() {
     {
       post.map(function(a, i){
         return (
-          <div className='list' key="i">
-            <h4>{post[i]} <span onClick={likeF}>👍</span> {like} </h4>
+          <div className='list' key={i}>
+            <h4 onClick={() => setModal(true)}>{post[i]} <span onClick={ () => {
+              let copy = [...like];
+              copy[i] = copy[i] + 1;
+              changeLike(copy);
+            } }>👍</span> {like[i]} </h4>
             <p>2월 12일 발행</p>
           </div>
         )
@@ -69,7 +79,7 @@ function App() {
 
     {/* 조건식 ? 참일 떄 실행할 코드 : 거짓일 때 실행할 코드 */}
     {
-      modal == true ? <Modal /> : null
+      modal == true ? <Modal post={post} 글제목변경={글제목변경}/> : null
     }
 
 
@@ -80,12 +90,19 @@ function App() {
   )
 }
 
-function Modal() {
+function 함수() {
+  let a = 10;
+}
+
+
+
+function Modal(props) {
   return (
-    <div className="modal">
-      <h4>제목</h4>
+    <div className="modal" style={{background: props.color}}>
+      <h4>{props.post[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button onClick={props.글제목변경}>글수정</button>
     </div>
   )
 }
