@@ -10,6 +10,7 @@ function App() {
   // 굳이 useState?: 그냥 변수는 변수값이 바뀌면 HTML에 자동으로 반영되지 않지만 useState는 변수값이 바뀌면 실시간으로 HTML에 반영됨
   let [post, changePost] = useState(['남자코트추천', '강남우동맛집', '파이썬독학']);
   let [like, changeLike] = useState([0, 0, 0]);
+  let [testInput, setTestInput] = useState('');
 
   let [modal, setModal] = useState(false);
 
@@ -20,6 +21,20 @@ function App() {
   function 글제목변경() {
     let copy = [...post];
     copy[0] = '여자코트추천';
+    changePost(copy);
+  }
+
+  function submitPost() {
+    let copy = [...post];
+    copy.push(testInput);
+    like.push(0);
+    changePost(copy);
+  }
+
+  function deletePost(i) {
+    let copy = [...post];
+    copy.splice(i, 1);
+    like.splice(i, 1);
     changePost(copy);
   }
 
@@ -65,16 +80,23 @@ function App() {
       post.map(function(a, i){
         return (
           <div className='list' key={i}>
-            <h4 onClick={() => setModal(true)}>{post[i]} <span onClick={ () => {
+            <h4 onClick={() => setModal(true)}>{post[i]} <span onClick={ (e) => {
+              e.stopPropagation();  // 이벤트 버블링 방지
               let copy = [...like];
               copy[i] = copy[i] + 1;
               changeLike(copy);
             } }>👍</span> {like[i]} </h4>
             <p>2월 12일 발행</p>
+            <button onClick={() => deletePost(i)}>Unpublish</button>
           </div>
         )
       })
     }
+
+    <input onChange={(e) => {
+      testInput = e.target.value;
+      }} />
+     <button onClick={submitPost}>Publish</button>
 
 
     {/* 조건식 ? 참일 떄 실행할 코드 : 거짓일 때 실행할 코드 */}
