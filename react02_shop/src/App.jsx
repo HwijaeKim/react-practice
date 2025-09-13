@@ -1,9 +1,14 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Button, Navbar, Container, Nav, NavDropdown, CarouselItem } from 'react-bootstrap';
+import Product1 from './assets/product01.png';
+import ProductItem from './components/productItem';
+import Data from './data.js';
 
 function App() {
+  let [shoes] = useState(Data);
+  console.log(shoes);
 
   return (
     <div className="app">
@@ -15,22 +20,28 @@ function App() {
             <Nav className="me-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#link">Link</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Button variant="primary">Primary</Button>
+
+      <div className="main-bg"></div>
+
+      <div className="container">
+        <div className="products-list">
+          {
+            shoes.map(item => (
+                <ProductItem 
+                  image = {Product1}
+                  title = {item.title}
+                  content = {item.content}
+                  price = {item.price}
+                />
+            ))
+          }
+        </div>
+      </div>
+    
     </div>
   )
 }
