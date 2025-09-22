@@ -1,5 +1,6 @@
 import {useState} from 'react'
-import './App.css'
+// import './App.css'
+import './App.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Navbar, Container, Nav, NavDropdown, CarouselItem } from 'react-bootstrap';
 import Product1 from './assets/product01.png';
