@@ -28,12 +28,12 @@ function App() {
 
       <div className="main-bg"></div>
 
-      <div className="container">
+      <div className="container-lg">
         <div className="products-list">
           {
-            shoes.map(item => (
+            shoes.map((item, i) => (
                 <ProductItem 
-                  image = {Product1}
+                  image = {'0'+(i+1)}
                   title = {item.title}
                   content = {item.content}
                   price = {item.price}

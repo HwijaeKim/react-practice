@@ -5,7 +5,7 @@
     margin-bottom: 24px;
 }
 
-.container {
+.container-lg {
     width: 100%;
 
     .products-list {
@@ -31,4 +31,13 @@
 .products-list .product:hover {
     transform: scale(1.075);
     transition: ease .25s;
+}
+
+
+@media (max-width: 768px) {
+    .products-list {
+        width: 90%;
+        margin: 0 auto;
+        flex-direction: column;
+    }
 }

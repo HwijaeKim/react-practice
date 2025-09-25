@@ -10,7 +10,7 @@ function ProductItem({
 
     return(
         <div className="product">
-            <img src={image} width="80%" />
+            <img src={'./src/assets/product'+image+'.png'} width="80%" />
             <h4>{title}</h4>
             <p>{content}</p>
             <p>{price} KRW</p>
