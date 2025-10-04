@@ -1,3 +1,8 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+* {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
 .main-bg {
     height: 300px;
     background: url('../main-bg.JPG') no-repeat center;
@@ -7,6 +12,24 @@
 
 .container-lg {
     width: 100%;
+
+    &.on-detail {
+        width: 70%;
+        margin: 0 auto;
+
+        .products-list {
+            display: flex;
+            gap: 24px;
+            justify-content: space-between;
+    
+            .product {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+            }
+        }
+    }
 
     .products-list {
         display: flex;
@@ -24,7 +47,6 @@
             box-shadow: 0 0 32px rgba(0, 0, 0, .1);
             text-align: center;
             transition: ease .25s;
-            
         }
     }
 }
@@ -32,12 +54,76 @@
     transform: scale(1.075);
     transition: ease .25s;
 }
-
-
 @media (max-width: 768px) {
     .products-list {
         width: 90%;
         margin: 0 auto;
         flex-direction: column;
+    }
+}
+
+
+
+
+.detail {
+    width: 95%;
+    height: 100%;
+    margin: 0 auto;
+    &__product {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: calc(24 / 16 * 1rem);
+        height: 100%;
+
+        .detail-flex {
+            &.text {
+                width: 100%;
+                height: 100%;
+                border: .5px solid #dfdfdf;
+                border-radius: calc(16 / 16 * 1rem);
+                box-shadow: 0 0 16px rgba(0, 0, 0, .1);
+                padding: calc(24 / 16 * 1rem) calc(32 / 16 * 1rem);
+            }
+
+            .title {
+                font-size: calc(48 / 16 * 1rem);
+                font-weight: 900;
+            }
+            .content {
+                font-size: calc(18 / 16 * 1rem);
+                font-weight: 00;
+            }
+            .price {
+                font-size: calc(18 / 16 * 1rem);
+                stroke-width: 500;
+            }
+            .buy-button {
+                width: calc(100 / 16 * 1rem);
+                height: calc(36 / 16 * 1rem);
+                border: none;
+                border-radius: calc(8 / 16 * 1rem);
+                background: #6c436a;
+                color: #fff;
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .detail {
+        &__product {
+            flex-direction: column;
+
+            .detail-flex {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                h4, p {
+                    text-align: center;
+                }
+
+            }
+        }
     }
 }

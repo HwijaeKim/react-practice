@@ -1,7 +1,5 @@
 import {useState} from 'react'
 import { Link } from 'react-router-dom'
-import '../assets/css/App.scss'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import ProductItem from '../components/productItem';
 import Data from '../data.js';
@@ -32,7 +30,7 @@ function Home() {
                 {
                     shoes.map((item, i) => (
                         <ProductItem 
-                        image = {'0'+(i+1)}
+                        image = {i}
                         title = {item.title}
                         content = {item.content}
                         price = {item.price}
@@ -41,10 +39,6 @@ function Home() {
                 }
                 </div>
             </div>
-
-
-            <Link to="/">홈</Link><br />
-            <Link to="/detail">상세페이지</Link>
             
         </div>
     )
