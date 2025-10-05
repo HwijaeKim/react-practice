@@ -21,7 +21,7 @@ function Home() {
         <div className="app">
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
-                <Navbar.Brand href="/">KCT 전자상가</Navbar.Brand>
+                <Navbar.Brand href="/">KCT 전자상가 Codespaces!</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
