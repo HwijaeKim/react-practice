@@ -1,7 +1,11 @@
 import {React, useState, useEffect} from "react";
 import {useParams} from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import TabContent from '../components/tabContent';
+import { addCart } from '../store';
+import Cart from '../pages/cart';
+
 // MUI
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -68,6 +72,9 @@ function Detail(props) {
 
     let [count, setCount] = useState(0)
 
+
+    let dispatch = useDispatch();
+
     return (
         <div className="detail">
             <Navbar expand="lg" className="bg-body-tertiary">
@@ -78,7 +85,7 @@ function Detail(props) {
                     <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/detail">Detail</Nav.Link>
-                    <Nav.Link href="/about">About</Nav.Link>
+                    <Nav.Link href="/cart">Cart</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
                 </Container>
@@ -105,11 +112,15 @@ function Detail(props) {
                 <p className="price">{props.shoes[id].price} KRW</p>
                 {/* <button className="buy-button">구입</button> */}
                 <TextField id="standard-basic" label="숫자만 입력하세요" variant="standard" value={number} onChange={typeNumber} />
-                <Button variant="contained" onClick={() => {setCount(count+1)}}>구입하기</Button>
+                <Button variant="contained" onClick={() => {
+                    dispatch(addCart(props.shoes[id]));
+                }}>구입하기</Button>
                 </div>
             </div>
 
             <TabContent shoes={props.shoes} />
+
+            <Cart />
         </div>
     )
 }
