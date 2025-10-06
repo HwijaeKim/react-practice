@@ -1,7 +1,7 @@
 import {React, useState, useEffect} from "react";
 import {useParams} from "react-router-dom"
 import { Navbar, Container, Nav } from 'react-bootstrap';
-
+import TabContent from '../components/tabContent';
 // MUI
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -67,10 +67,6 @@ function Detail(props) {
     }
 
     let [count, setCount] = useState(0)
-    const [value, setValue] = useState('1');
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
 
     return (
         <div className="detail">
@@ -82,6 +78,7 @@ function Detail(props) {
                     <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/detail">Detail</Nav.Link>
+                    <Nav.Link href="/about">About</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
                 </Container>
@@ -112,20 +109,7 @@ function Detail(props) {
                 </div>
             </div>
 
-            <Box sx={{ width: '100%', typography: 'body1' }}>
-                <TabContext value={value}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <TabList onChange={handleChange} aria-label="lab API tabs example">
-                        <Tab label="Item One" value="1" />
-                        <Tab label="Item Two" value="2" />
-                        <Tab label="Item Three" value="3" />
-                    </TabList>
-                    </Box>
-                    <TabPanel value="1">내용0</TabPanel>
-                    <TabPanel value="2">내용1</TabPanel>
-                    <TabPanel value="3">내용2</TabPanel>
-                </TabContext>
-            </Box>
+            <TabContent shoes={props.shoes} />
         </div>
     )
 }
