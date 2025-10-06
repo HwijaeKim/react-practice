@@ -60,7 +60,8 @@
         gap: calc(24 / 16 * 1rem);
         width: 95%;
         height: 100%;
-        margin: 0 auto;
+        margin: auto;
+        margin-bottom: calc(24 / 16 * 1rem);
 
         .detail-flex {
             img {

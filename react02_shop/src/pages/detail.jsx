@@ -6,6 +6,10 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 
 // import styled from 'styled-components';
@@ -63,6 +67,10 @@ function Detail(props) {
     }
 
     let [count, setCount] = useState(0)
+    const [value, setValue] = useState('1');
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
         <div className="detail">
@@ -101,9 +109,23 @@ function Detail(props) {
                 {/* <button className="buy-button">구입</button> */}
                 <TextField id="standard-basic" label="숫자만 입력하세요" variant="standard" value={number} onChange={typeNumber} />
                 <Button variant="contained" onClick={() => {setCount(count+1)}}>구입하기</Button>
-
                 </div>
             </div>
+
+            <Box sx={{ width: '100%', typography: 'body1' }}>
+                <TabContext value={value}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <TabList onChange={handleChange} aria-label="lab API tabs example">
+                        <Tab label="Item One" value="1" />
+                        <Tab label="Item Two" value="2" />
+                        <Tab label="Item Three" value="3" />
+                    </TabList>
+                    </Box>
+                    <TabPanel value="1">내용0</TabPanel>
+                    <TabPanel value="2">내용1</TabPanel>
+                    <TabPanel value="3">내용2</TabPanel>
+                </TabContext>
+            </Box>
         </div>
     )
 }
