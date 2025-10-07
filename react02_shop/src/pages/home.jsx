@@ -1,7 +1,7 @@
-import {useState} from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar, Container, Nav } from 'react-bootstrap';
 import ProductItem from '../components/productItem';
+import WatchedItem from '../components/watchedItem';
 import Data from '../data.js';
 import axios from 'axios';
 
@@ -9,12 +9,30 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 function Home() {
     let [shoes, setShoes] = useState(Data);
     let [moreBtnCount, setMoreBtnCount] = useState(0);
     let [loading, setLoading] = useState(false);
+    let [watched, setWatched] = useState([]);
     console.log(shoes);
+
+    useEffect(() => {
+        if(localStorage.getItem('watched')) {
+            return;
+            
+        } else {
+            localStorage.setItem('watched', JSON.stringify([]));
+        }
+    }, []) // 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행되도록 수정
+
+    useEffect(() => {
+        let get = localStorage.getItem('watched');
+        if (get) {
+            setWatched(JSON.parse(get));
+        }
+    }, [])
 
     function sortGanada() {
         let copy = [...shoes];
@@ -58,24 +76,15 @@ function Home() {
         } else if(moreBtnCount === 2) {
             alert('더이상 로드할 상품이 없습니다.');
         }
-
     }
+
+
+
+
+
 
     return (
         <div className="app">
-            <Navbar expand="lg" className="bg-body-tertiary">
-                <Container>
-                <Navbar.Brand href="/">KCT 전자상가 Codespaces!</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/detail">Detail</Nav.Link>
-                    <Nav.Link href="/about">About</Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-                </Container>
-            </Navbar>
 
             <div className="main-bg"></div>
 
@@ -85,10 +94,12 @@ function Home() {
                 {
                     shoes.map((item) => (
                         <ProductItem 
+                        key = {item.id}
                         image = {item.id}
                         title = {item.title}
                         content = {item.content}
                         price = {item.price}
+                        href = {'/detail/' + item.id}
                         />
                     ))
                 }
@@ -100,6 +111,26 @@ function Home() {
                 )}
                 <Button variant="contained" onClick={fetchProducts} >더 불러오기</Button>
             </div>
+
+            <br></br><br></br>
+
+            <div className="container-lg">
+                <h3>최근 본 상품</h3>
+                <div className="products-list">
+                    {watched &&
+                        watched.map((item) => {
+                            return (
+                                <WatchedItem 
+                                key = {item}
+                                id = {item}
+                                shoes={shoes}
+                                />
+                            )
+                        })
+                    }
+                </div>
+            </div>
+
             
         </div>
     )

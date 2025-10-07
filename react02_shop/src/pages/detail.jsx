@@ -1,7 +1,6 @@
 import {React, useState, useEffect} from "react";
 import {useParams} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
-import { Navbar, Container, Nav } from 'react-bootstrap';
 import TabContent from '../components/tabContent';
 import { addCart } from '../store';
 import Cart from '../pages/cart';
@@ -50,9 +49,20 @@ function Detail(props) {
     }, [])
 
     
+
     useEffect(() => {
-        // isNumber(number)
-    }, [number]);
+        let watched = localStorage.getItem('watched');
+        // const currentItem = { id };
+        if (!watched) {
+            watched = [];
+        } else {
+                watched = JSON.parse(watched);
+        }
+        let set = new Set(watched);
+        set.add(Number(id));
+        localStorage.setItem('watched', JSON.stringify(Array.from(set)));
+        console.log(set);
+    }, [id]);
 
     const typeNumber = e => {
         const value = e.target.value;
@@ -77,19 +87,6 @@ function Detail(props) {
 
     return (
         <div className="detail">
-            <Navbar expand="lg" className="bg-body-tertiary">
-                <Container>
-                <Navbar.Brand href="/">KCT 전자상가</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/detail">Detail</Nav.Link>
-                    <Nav.Link href="/cart">Cart</Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-                </Container>
-            </Navbar>
 
             {/* <YellowBtn bg="yellow" >버튼</YellowBtn>
             <YellowBtn bg="blue">버튼</YellowBtn> */}

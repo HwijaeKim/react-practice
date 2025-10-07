@@ -1,19 +1,15 @@
 import React from 'react';
 // import Data from './data.js';
+import { useNavigate } from 'react-router-dom';
 
-function ProductItem({
-    image = '',
-    title = '타이틀 입력',
-    content = '콘텐츠 입력',
-    price = 0
-}) {
-
-    return(
-        <div className="product">
-            <img src={'../src/assets/product'+image+'.png'} width="80%" />
-            <h4>{title}</h4>
-            <p>{content}</p>
-            <p>{price} KRW</p>
+function ProductItem(props) {
+    const navigate = useNavigate();
+    return (
+        <div className="product" onClick={() => navigate(props.href)}>
+            <img src={'../src/assets/product'+props.image+'.png'} width="80%" />
+            <h4>{props.title}</h4>
+            <p>{props.content}</p>
+            <p>{props.price} KRW</p>
         </div>
     )
 }
