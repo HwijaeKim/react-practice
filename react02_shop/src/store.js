@@ -29,10 +29,13 @@ let cart = createSlice({
                 console.log(newItem);
                 state.push(newItem);
             }
+        },
+        deleteCart(state, productId) {
+            return state.filter(state => state.id !== productId.payload);
         }
     }
 })
-export let { plusCount, addCart } = cart.actions
+export let { plusCount, addCart, deleteCart } = cart.actions
 
 
 export default configureStore({

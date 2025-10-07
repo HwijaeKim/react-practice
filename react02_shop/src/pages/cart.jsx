@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeName, changeAge } from '../store/userSlice';
-import { plusCount } from '../store';
+import { plusCount, deleteCart } from '../store';
 // MUI
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 
 function Cart() {
 
@@ -43,10 +44,15 @@ function Cart() {
                     </TableCell>
                     <TableCell>{row.name}</TableCell>
                     <TableCell>{row.count}</TableCell>
-                    <TableCell><button onClick={() => {
-                        dispatch(plusCount(row.id));
-                        console.log(row.id);
-                    }}>+</button></TableCell>
+                    <TableCell>
+                        <Button variant="outlined" onClick={() => {
+                            dispatch(plusCount(row.id));
+                            console.log(row.id);
+                        }}>+</Button>
+                        <Button variant="outlined" onClick={() => {
+                            dispatch(deleteCart(row.id));
+                        }}>삭제</Button>
+                    </TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
