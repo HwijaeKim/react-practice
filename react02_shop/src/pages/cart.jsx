@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeName, changeAge } from '../store/userSlice';
 import { plusCount, deleteCart } from '../store';
@@ -12,12 +12,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
+
 function Cart() {
 
     let name = useSelector((state) => state.user);
     let cart = useSelector((state) => state.cart);
     let dispatch = useDispatch();
-
 
     return (
         <div className="cart">
