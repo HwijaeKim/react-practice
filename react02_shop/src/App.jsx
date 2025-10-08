@@ -3,8 +3,20 @@ import Router from './Router';
 import './assets/css/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 function App() {
+
+  let result = useQuery({
+    queryKey: ['getName'],
+    refetchOnWindowFocus: false,
+    retry: 2,
+    queryFn: () => 
+      axios.get('https://codingapple1.github.io/userdata.json')
+      .then(response => response.data)
+  })
+  console.log(result);
 
   return (
     <div className="app">
@@ -19,6 +31,11 @@ function App() {
               <Nav.Link href="/cart">장바구니</Nav.Link>
               </Nav>
           </Navbar.Collapse>
+          <Nav className="ms-auto">
+            { result.isPending && '받아들이는 중' }
+            { result.isError && '에러!!' }
+            { result.isSuccess && '반갑습니다. ' + result.data.name }
+          </Nav>
           </Container>
       </Navbar>
 

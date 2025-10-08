@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useQuery } from '@tanstack/react-query';
 
 function Home() {
     let [shoes, setShoes] = useState(Data);
@@ -79,7 +80,12 @@ function Home() {
     }
 
 
+    // useQuery({
+    //     queryKey: ['작명'],
+    //     queryFn: () => {
 
+    //     }
+    // })
 
 
 

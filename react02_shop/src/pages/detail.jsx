@@ -13,6 +13,9 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import { useQueryClient } from "@tanstack/react-query";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 
 // import styled from 'styled-components';
@@ -81,9 +84,8 @@ function Detail(props) {
     }
 
     let [count, setCount] = useState(0)
-
-
     let dispatch = useDispatch();
+
 
     return (
         <div className="detail">
@@ -93,9 +95,9 @@ function Detail(props) {
 
 
             {modal && (
-                <Box component="section" sx={{ p: 2, border: '1px dashed grey', margin: '20px' }}>
-                    2초 뒤 사라입니다!
-                </Box>
+                <Stack sx={{ width: '95%', margin: '16px auto' }} spacing={2}>
+                    <Alert severity="warning">2초 뒤 사라집니다!</Alert>
+                </Stack>
             )}
 
 
