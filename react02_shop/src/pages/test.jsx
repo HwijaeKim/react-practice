@@ -1,4 +1,4 @@
-import { React, useState, useTransition, useDeferredValue } from 'react';
+import { React, useState, useTransition, useDeferredValue, useEffect } from 'react';
 
 let a = new Array(10000).fill(0)
 
@@ -9,6 +9,26 @@ function Test() {
     let [isPending, startTransition] = useTransition()
     // 이 변수(스테이트)는 늦게 처리
     let state = useDeferredValue(name)
+
+
+    let [count, setCount] = useState(0);
+    let [age, setAge] = useState(20);
+
+    useEffect(() => {
+        if(count != 0 && count < 3) {
+            setAge(age+1)
+        }
+    }, [count])
+
+    // function addAge() {
+    //     setCount(count+1)
+    //     if(count < 3) {
+    //         setAge(age+1)
+    //     } else {
+    //         alert('그만 더하세요');
+    //     }
+    // }
+
 
     return (
         <div className="test">
@@ -24,6 +44,11 @@ function Test() {
             })
                 
             }
+
+            <div className="age">
+                <div>안녕하십니까 전 {age}</div>
+                <button onClick={() => {setCount(count++)}}>누르면 한살먹기</button>
+            </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { React, useState, memo } from 'react';
+import { React, useState, memo, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeName, changeAge } from '../store/userSlice';
 import { plusCount, deleteCart } from '../store';
