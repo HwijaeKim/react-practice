@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import TabContent from '../components/tabContent';
 import { addCart } from '../store';
 import Cart from '../pages/cart';
+import { useLike } from "../hooks/like";
 
 // MUI
 import Button from '@mui/material/Button';
@@ -16,6 +17,8 @@ import TabPanel from '@mui/lab/TabPanel';
 import { useQueryClient } from "@tanstack/react-query";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 
 
 // import styled from 'styled-components';
@@ -83,8 +86,10 @@ function Detail(props) {
         return true;
     }
 
-    let [count, setCount] = useState(0)
+    // let [count, setCount] = useState(0)
     let dispatch = useDispatch();
+
+    let [like, toggleLike] = useLike();
 
 
     return (
@@ -106,14 +111,19 @@ function Detail(props) {
                     <img src={'../src/assets/product' + id + '.png' } />
                 </div>
                 <div className="detail-flex text">
-                <h4 className="title">{props.shoes[id].title}</h4>
-                <p className="content">{props.shoes[id].content}</p>
-                <p className="price">{props.shoes[id].price} KRW</p>
-                {/* <button className="buy-button">구입</button> */}
-                <TextField id="standard-basic" label="숫자만 입력하세요" variant="standard" value={number} onChange={typeNumber} />
-                <Button variant="contained" onClick={() => {
-                    dispatch(addCart(props.shoes[id]));
-                }}>구입하기</Button>
+                    <h4 className="title">{props.shoes[id].title}</h4>
+                    <p className="content">{props.shoes[id].content}</p>
+                    <p className="price">{props.shoes[id].price} KRW</p>
+                    {/* <button className="buy-button">구입</button> */}
+                    {/* <TextField id="standard-basic" label="숫자만 입력하세요" variant="standard" value={number} onChange={typeNumber} /> */}
+                    <Button variant="contained" onClick={() => {
+                        dispatch(addCart(props.shoes[id]));
+                    }}>구입하기</Button>
+
+                    <div className="like">
+                        <span>{like}</span>
+                        <FavoriteIcon onClick={() => {toggleLike()}}></FavoriteIcon>
+                    </div>
                 </div>
             </div>
 

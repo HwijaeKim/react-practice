@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Router from './Router';
 import './assets/css/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { useGetUsername } from './hooks/getUsername';
 
 function App() {
 
-  let result = useQuery({
-    queryKey: ['getName'],
-    refetchOnWindowFocus: false,
-    retry: 2,
-    queryFn: () => 
-      axios.get('https://codingapple1.github.io/userdata.json')
-      .then(response => response.data)
-  })
-  console.log(result);
+  let [username] = useGetUsername();
+
+  // let result = useQuery({
+  //   queryKey: ['getName'],
+  //   refetchOnWindowFocus: false,
+  //   retry: 2,
+  //   queryFn: () => 
+  //     axios.get('https://codingapple1.github.io/userdata.json')
+  //     .then(response => response.data)
+  // })
+  // console.log(result);
 
   return (
     <div className="app">
@@ -32,9 +35,10 @@ function App() {
               </Nav>
           </Navbar.Collapse>
           <Nav className="ms-auto">
-            { result.isPending && '받아들이는 중' }
+            {/* { result.isPending && '받아들이는 중' }
             { result.isError && '에러!!' }
-            { result.isSuccess && '반갑습니다. ' + result.data.name }
+            { result.isSuccess && '반갑습니다. ' + result.data.name } */}
+            반갑습니다. {username}
           </Nav>
           </Container>
       </Navbar>

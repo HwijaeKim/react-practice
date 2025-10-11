@@ -38,4 +38,14 @@ export default defineConfig({
       },
     })
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://synologykct.synology.me',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+      },
+    },
+  },
 })
